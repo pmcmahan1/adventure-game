@@ -1,0 +1,20 @@
+
+.app{
+  $primary: #fefefd;
+  $secondary: #15151b;
+  $primbuttn: #fefe00;
+  $secbuttn: #29282d;
+  $accent: #fdfe00;
+  $h1: 48px;
+  $h2: 32px;
+  $subtitle: 24px;
+  $p: 18px;
+  $sub: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  gap: 5em;
+
+}
