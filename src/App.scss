@@ -17,4 +17,41 @@
   height: 100%;
   gap: 5em;
 
+  .status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5em;
+    font-size: 44px;
+    width: 100%;
+
+    .health{
+      display: flex;
+      align-items: center;
+    }
+
+    .inventory{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .inventory-item{
+        height: 80px;
+        width: 80px;
+      }
+    }
+  }
+
+}
+
+
+@media screen and (max-width: 1000px) {
+.app{
+  .status{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+}
+
 }
