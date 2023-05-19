@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import "./App.scss";
 import heart from "./assets/heart.png";
 import backpack from "./assets/backpack.png";
-import knife from "./assets/knife.png";
-import flashlight from "./assets/flashlight.png";
-import key from "./assets/key.png"
+import key from "./assets/key.png";
 import hallway from "./assets/hallway.jpg";
 import livingroom from "./assets/livingroom.jpg";
-import frontdoor from './assets/frontdoor.jpg'
+import frontdoor from "./assets/frontdoor.jpg";
+import freedom from "./assets/freedom.jpg"
 
 function App() {
   const [hp, setHp] = useState(100);
   const [inv, setInv] = useState({
-    knife: false,
-    flashlight: false,
     key: false,
   });
   const [displayText, setDisplayText] = useState(
@@ -30,13 +27,16 @@ function App() {
   const [value3, setValue3] = useState(3);
   const [value4, setValue4] = useState(99);
   const [background, setBackground] = useState(hallway);
-  const [isHurt, setIsHurt] = useState(false)
+  const [isHurt, setIsHurt] = useState(false);
+  const [win, setWin] = useState(false);
 
   const handleChange = (event) => {
     let value = parseInt(event.target.value);
     switch (value) {
       case 1:
-        setDisplayText("You attempt to open the door, but the door is jammed from the other side.");
+        setDisplayText(
+          "You attempt to open the door, but the door is jammed from the other side."
+        );
         setValue1(99);
         break;
       case 2:
@@ -71,36 +71,42 @@ function App() {
         setChoiceThree("Continue through the building.");
         break;
       case 5:
-        setDisplayText("You try to find a light switch, however you step on a broken piece of glass doing so.")
-        setHp(prevHp => prevHp - 10)
-        setIsHurt(true)
+        setDisplayText(
+          "You try to find a light switch, however you step on a broken piece of glass doing so."
+        );
+        setHp((prevHp) => prevHp - 10);
+        setIsHurt(true);
         setTimeout(() => {
           setIsHurt(false);
-        }, 2500)
-        setValue2(99)
+        }, 2500);
+        setValue2(99);
         setChoiceThree("Continue through the building.");
         break;
       case 6:
-        setBackground(frontdoor)
-        setDisplayText("You walk through the next doorway, and find what seems to be the entrance to the building.")
-        setValue1(8)
-        setValue2(9)
-        setValue3(10)
-        setValue4(11)
-        setChoiceOne("Try to open the door.")
-        setChoiceTwo("")
-        setChoiceThree("Study your surroundings.")
-        setChoiceFour("Turn around.")
+        setBackground(frontdoor);
+        setDisplayText(
+          "You walk through the next doorway, and find what seems to be the entrance to the building."
+        );
+        setValue1(8);
+        setValue2(9);
+        setValue3(10);
+        setValue4(11);
+        setChoiceOne("Try to open the door.");
+        setChoiceTwo("");
+        setChoiceThree("Study your surroundings.");
+        setChoiceFour("Turn around.");
         break;
       case 7:
-        setDisplayText("You stand in the middle of the room, pondering about how you came to be in this place.")
-        setValue4(99)
+        setDisplayText(
+          "You stand in the middle of the room, pondering about how you came to be in this place."
+        );
+        setValue4(99);
         break;
       case 8:
-        setDisplayText("You pull on the door but it is locked.")
-        setValue1(99)
+        setDisplayText("You pull on the door but it is locked.");
+        setValue1(99);
         if (inv.key) {
-          setChoiceTwo("Use your key on the locked door.")
+          setChoiceTwo("Use your key on the locked door.");
         }
         break;
       case 9:
@@ -108,57 +114,65 @@ function App() {
           ...prevInv,
           key: !prevInv.key,
         }));
-        setDisplayText("Congratulations! You escaped the house. Game over.")
-        setChoiceOne("")
-        setChoiceTwo("")
-        setChoiceThree("")
-        setChoiceFour("")
+        setBackground(freedom)
+        setWin(true)
+        setDisplayText("You open the door with the key and leave the building.");
+        setChoiceOne("");
+        setChoiceTwo("");
+        setChoiceThree("");
+        setChoiceFour("");
         break;
       case 10:
-        setDisplayText("You study the room, however you see no options besides turning around or finding a way to open the locked door.")
-        setValue3(99)
+        setDisplayText(
+          "You study the room, however you see no options besides turning around or finding a way to open the locked door."
+        );
+        setValue3(99);
         break;
-        case 11:
-          setBackground(livingroom)
-          setDisplayText("You return to the living room.")
-          setChoiceOne("Search the cupboard.")
-          setChoiceTwo("Explore the room.")
-          setChoiceThree("Return to the front door.")
-          setChoiceFour("")
-          setValue1(12)
-          setValue2(13)
-          setValue3(14)
+      case 11:
+        setBackground(livingroom);
+        setDisplayText("You return to the living room.");
+        setChoiceOne("Search the cupboard.");
+        setChoiceTwo("Explore the room.");
+        setChoiceThree("Return to the front door.");
+        setChoiceFour("");
+        setValue1(12);
+        setValue2(13);
+        setValue3(14);
+        break;
+      case 12:
+        if (inv.key) {
+          setDisplayText(
+            "You search the cupboard once again and find nothing new."
+          );
+          setValue1(99);
           break;
-        case 12:
-          if (inv.key) {
-            setDisplayText("You search the cupboard once again and find nothing new.")
-            setValue1(99)
-            break
-          } else {
-            setDisplayText("You search the cupboard and find a key and stow it away in your pocket.")
-            setInv((prevInv) => ({
-              ...prevInv,
-              key: !prevInv.key,
-            }));
-            setValue1(99)
-            break
-          }
-        case 13:
-          setDisplayText("You find nothing worthwhile.")
-          setValue2(99)
+        } else {
+          setDisplayText(
+            "You search the cupboard and find a key and stow it away in your pocket."
+          );
+          setInv((prevInv) => ({
+            ...prevInv,
+            key: !prevInv.key,
+          }));
+          setValue1(99);
           break;
-        case 14:
-          setBackground(frontdoor)
-          setDisplayText("You return to the front door.")
-          setValue1(8)
-          setValue2(9)
-          setValue3(10)
-          setValue4(11)
-          setChoiceOne("Try to open the door.")
-          setChoiceTwo("")
-          setChoiceThree("Study your surroundings.")
-          setChoiceFour("Turn around.")
-          break;
+        }
+      case 13:
+        setDisplayText("You find nothing worthwhile.");
+        setValue2(99);
+        break;
+      case 14:
+        setBackground(frontdoor);
+        setDisplayText("You return to the front door.");
+        setValue1(8);
+        setValue2(9);
+        setValue3(10);
+        setValue4(11);
+        setChoiceOne("Try to open the door.");
+        setChoiceTwo("");
+        setChoiceThree("Study your surroundings.");
+        setChoiceFour("Turn around.");
+        break;
       default:
         console.log("Error");
         break;
@@ -187,6 +201,7 @@ function App() {
       </div>
       <div className="text-display">{displayText}</div>
       <div className="choice-container">
+        {win && <div className="winner">Game Over</div>}
         {choiceOne && (
           <button
             onClick={handleChange}
@@ -229,4 +244,3 @@ function App() {
 }
 
 export default App;
-
