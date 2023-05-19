@@ -17,6 +17,12 @@
   height: 100%;
   gap: 5em;
 
+  .text-display{
+    max-width: 800px;
+    text-align: justify;
+    font-size: 24px;
+  }
+
   .status{
     display: flex;
     justify-content: center;

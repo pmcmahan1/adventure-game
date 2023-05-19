@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Choices from "./Choices";
 import "./App.scss";
 import heart from "./assets/heart.png";
 import backpack from "./assets/backpack.png";
@@ -48,12 +49,10 @@ function App() {
           )}
         </div>
       </div>
-      <button onClick={handleChange} value={1}>
-        knife
-      </button>
-      <button onClick={handleChange} value={2}>
-        flashlight
-      </button>
+      <div className="text-display">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt possimus sunt, autem quod deserunt quaerat, culpa sed fugit omnis, exercitationem veritatis itaque aliquid ab quo laborum recusandae excepturi eligendi quae!
+      </div>
+      <Choices />
     </div>
   );
 }

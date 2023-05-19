@@ -1,0 +1,18 @@
+.choice-container{
+    background-color: #29282d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    gap: 1em;
+    width: 60%;
+    border-radius: 10px;
+
+    .choice-item{
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid gray;
+        cursor: pointer;
+    }
+}
