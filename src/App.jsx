@@ -27,6 +27,7 @@ function App() {
   const [value3, setValue3] = useState(3);
   const [value4, setValue4] = useState(99);
   const [background, setBackground] = useState(hallway);
+  const [isHurt, setIsHurt] = useState(false)
 
   const handleChange = (event) => {
     let value = parseInt(event.target.value);
@@ -51,8 +52,8 @@ function App() {
         setValue4(7);
         setChoiceOne("Search the cupboard.");
         setChoiceTwo("Try to find a light switch.");
-        setChoiceThree("Waste no time and continue through the building");
-        setChoiceFour("Turn around.");
+        setChoiceThree("Waste no time and continue through the building.");
+        setChoiceFour("Do nothing.");
         setBackground(livingroom);
         break;
       case 4:
@@ -64,6 +65,21 @@ function App() {
           ...prevInv,
           knife: !prevInv.knife,
         }));
+        setChoiceThree("Continue through the building.");
+        break;
+      case 5:
+        setDisplayText("You try to find a light switch, however you step on a broken piece of glass doing so.")
+        setHp(prevHp => prevHp - 10)
+        setIsHurt(true)
+        setTimeout(() => {
+          setIsHurt(false);
+        }, 2500)
+        setValue2(99)
+        setChoiceThree("Continue through the building.");
+        break;
+      case 7:
+        setDisplayText("You stand in the middle of the room, pondering about how you came to be in this place.")
+        setValue4(99)
         break;
       default:
         console.log("Error");
@@ -77,6 +93,7 @@ function App() {
         <div className="health">
           <img src={heart} alt="" />
           {hp}
+          {isHurt && <div className="hurt">-10</div>}
         </div>
         <div className="inventory">
           <img src={backpack} alt="" />
@@ -134,7 +151,3 @@ function App() {
 
 export default App;
 
-// setInv((prevInv) => ({
-//   ...prevInv,
-//   flashlight: !prevInv.flashlight,
-// }));
